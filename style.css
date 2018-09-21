@@ -1,0 +1,19 @@
+body {
+    text-align:center;
+}
+
+.todo-list {
+    padding: 10px;
+    display: grid;
+    grid-template: 1fr / 1fr ;
+}
+.todo-item {
+    padding: 15px;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 10% 70% 20%;
+    justify-content: center;
+}
+div[done = "true"] {
+    align-self: flex-end;
+}

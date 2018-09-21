@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript: To-Do</title>
+    <script>
+    </script>
+    <noscript>
+      Sie haben JavaScript deaktiviert.
+    </noscript>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+
+    <form autocomplete="off" onsubmit="addEntry(event)">
+        <input autofocus="true" type="text" id="myInput" focus="true">
+        <button type="submit">Add</button>
+    </form>
+
+    <div id="Todos" class="todo-list">
+    </div>
+
+    <hr>
+
+    <div id="doneTodos" class="todo-list">
+    </div>
+
+    <script src="todoApp.js"></script>
+  </body>
+</html>
