@@ -1,3 +1,7 @@
+export {
+  addTodoToList,
+}
+
 //Variablen
 var todoList = [],
     i = 0,
@@ -5,7 +9,7 @@ var todoList = [],
     text;
 
 
-    
+
 function checkForStorage(){
     if (localStorage.getItem("todoList") !== null ){
         todoList = getLocalStorage();
@@ -29,7 +33,7 @@ function addEntry(event) {
     let textAlreadyThere = Array.from(document.querySelectorAll('label')).find(function(label) {
         return label.textContent === text
     });
-    
+
     if(typeof textAlreadyThere != 'undefined' || textAlreadyThere != null ) {
         return alert("Du hast schon so ein To-Do!")
     }
@@ -60,7 +64,7 @@ function createTodoEntry(todoEntry, todoListDiv) {
             let doneTodoList = document.getElementById("doneTodos");
             doneTodoList.appendChild(todoEntryDiv);
         }else {
-           todoListDiv.appendChild(todoEntryDiv); 
+           todoListDiv.appendChild(todoEntryDiv);
         }
     })
 
@@ -68,7 +72,7 @@ function createTodoEntry(todoEntry, todoListDiv) {
 
 
     let label = document.createElement("label");
-    
+
     if (typeof todoEntry === 'object'){
         label.innerText = todoEntry.todoText;
     }else {
@@ -76,7 +80,7 @@ function createTodoEntry(todoEntry, todoListDiv) {
     }
 
     todoEntryDiv.appendChild(checkbox);
-    
+
     todoEntryDiv.appendChild(label);
 
     todoEntryDiv.appendChild(button);
