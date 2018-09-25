@@ -19,3 +19,14 @@ describe('foo', function() {
     expect(foo("foo")).to.equal("foo");
   });
 });
+
+describe('mocha tests', function () {
+
+  jsdom()
+
+  it('has document', function () {
+    var div = document.createElement('div')
+    expect(div.nodeName).eql('DIV')
+  })
+
+})

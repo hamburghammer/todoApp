@@ -18,9 +18,8 @@
   "homepage": "https://github.com/hamburghammer/todoApp#readme",
   "dependencies": {
     "chai": "^4.1.2",
-    "mocha": "^5.2.0"
-  },
-  "devDependencies": {
+    "mocha": "^5.2.0",
     "mocha-jsdom": "^2.0.0"
-  }
+  },
+  "devDependencies": {}
 }
