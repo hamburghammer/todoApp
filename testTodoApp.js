@@ -1,7 +1,10 @@
+var expect = require('chai').expect;
+var chai = require('chai')
+chai.use(require('chai-dom'))
+
 var addTodoToList = require("./todoApp.js").addTodoToList;
 var getTodoList = require("./todoApp.js").getTodoList;
 var foo = require('./todoApp.js').foo;
-var expect = require('chai').expect;
 
 describe('addTodoToList', function() {
   it('should return a arry', function() {
