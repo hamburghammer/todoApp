@@ -1,6 +1,3 @@
-export {
-  addTodoToList,
-}
 
 //Variablen
 var todoList = [],
@@ -8,6 +5,7 @@ var todoList = [],
     storedTodoList,
     text;
 
+console.error("HALLOOOOOO");
 
 
 function checkForStorage(){
@@ -89,7 +87,7 @@ function createTodoEntry(todoEntry, todoListDiv) {
 
     button.onclick = function(){
         todoListDiv.removeChild(todoEntryDiv);//Es fehlt das entfehrnen aus dem Array
-        rmTodo(todoList.findIndex(todo => todo === todoEntry.todoTest)
+        rmTodo(todoList.findIndex(todo => todo === todoEntry.todoTest))
     }
 
     return todoEntryDiv;
@@ -105,14 +103,28 @@ function getLocalStorage(){
     return storedTodoList;
 }
 
-function addTodoToList(todo){
+function addTodoToList(todo) {
     todoList.push({
         completed: false,
         todoText: todo,
     })
+}
 
+function getTodoList() {
+  return todoList;
+}
+
+function foo(bar) {
+  return bar;
+}
 
 
 function rmTodo(position){
     todoList.splice(position, 1);
+}
+
+module.exports = {
+  addTodoToList: addTodoToList,
+  foo: foo,
+  getTodoList: getTodoList
 }
