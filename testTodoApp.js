@@ -1,6 +1,6 @@
+var jsdom = require('mocha-jsdom');
 var expect = require('chai').expect;
-var chai = require('chai')
-expect.use(require('chai-dom').use)
+
 
 var addTodoToList = require("./todoApp.js").addTodoToList;
 var getTodoList = require("./todoApp.js").getTodoList;

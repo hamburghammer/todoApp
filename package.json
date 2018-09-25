@@ -19,5 +19,8 @@
   "dependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.2.0"
+  },
+  "devDependencies": {
+    "mocha-jsdom": "^2.0.0"
   }
 }
