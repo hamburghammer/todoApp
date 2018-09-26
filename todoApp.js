@@ -130,5 +130,7 @@ module.exports = {
   addTodoToList: addTodoToList,
   foo: foo,
   getTodoList: getTodoList,
-  localStorage: localStorage
+  localStorage: localStorage,
+  setLocalStorage: setLocalStorage,
+  getLocalStorage: getLocalStorage,
 }
