@@ -1,4 +1,5 @@
 var expect = require('chai').expect;
+var assert = require('chai').assert;
 require('dom-test');
 
 var addTodoToList = require("../todoApp.js").addTodoToList;
