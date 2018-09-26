@@ -4,6 +4,7 @@ require('dom-test');
 var addTodoToList = require("./todoApp.js").addTodoToList;
 var getTodoList = require("./todoApp.js").getTodoList;
 var foo = require('./todoApp.js').foo;
+//var localStorage = require('./todoApp.js').localStorage;
 
 describe('addTodoToList', function() {
   it('should return a arry', function() {
@@ -18,8 +19,6 @@ describe('foo', function() {
     expect(foo("foo")).to.equal("foo");
   });
 });
-
-require('dom-test');
 
 describe('DomText', () => {
 
@@ -67,3 +66,10 @@ describe('DomText', () => {
     expect(text.nodeType).equal(Node.TEXT_NODE);
   });
 });
+
+describe('localStorage', function() {
+  it('Set end Read', function() {
+    localStorage.setItem("foo", "bar");
+    expect(localStorage.getItem("foo")).to.equal("bar");
+  })
+})

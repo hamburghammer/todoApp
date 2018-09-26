@@ -5,7 +5,10 @@ var todoList = [],
     storedTodoList,
     text;
 
-console.error("HALLOOOOOO");
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
 
 
 function checkForStorage(){
@@ -126,5 +129,6 @@ function rmTodo(position){
 module.exports = {
   addTodoToList: addTodoToList,
   foo: foo,
-  getTodoList: getTodoList
+  getTodoList: getTodoList,
+  localStorage: localStorage
 }
