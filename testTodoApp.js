@@ -1,6 +1,5 @@
-var jsdom = require('mocha-jsdom');
 var expect = require('chai').expect;
-
+require('dom-test');
 
 var addTodoToList = require("./todoApp.js").addTodoToList;
 var getTodoList = require("./todoApp.js").getTodoList;
@@ -20,13 +19,51 @@ describe('foo', function() {
   });
 });
 
-describe('mocha tests', function () {
+require('dom-test');
 
-  jsdom()
+describe('DomText', () => {
 
-  it('has document', function () {
-    var div = document.createElement('div')
-    expect(div.nodeName).eql('DIV')
-  })
+  it('uses constructor argument as text content', () => {
 
-})
+    // given
+    const text = document.createTextNode('text');
+
+    // then
+    expect(text.textContent).equal('text');
+  });
+
+  it('converts constructor argument to string', () => {
+    expect(document.createTextNode(null).textContent).equal('null');
+    expect(document.createTextNode(undefined).textContent, ).equal('undefined');
+    expect(document.createTextNode(10).textContent).equal('10');
+  });
+
+  // it('throws an exception for symbol value', () => {
+  //
+  //   // given
+  //   const text = document.createTextNode('');
+  //
+  //   // then
+  //   expect.throws(() => {
+  //     text.textContent = Symbol.for('invalid');
+  //   }, TypeError, /Cannot convert a Symbol value to a string/);
+  // });
+
+  it('returns #text as node name', () => {
+
+    // given
+    const text = document.createTextNode('text');
+
+    // then
+    expect(text.nodeName).equal('#text');
+  });
+
+  it('returns Node.TEXT_NODE as node type', () => {
+
+    // given
+    const text = document.createTextNode('comment');
+
+    // then
+    expect(text.nodeType).equal(Node.TEXT_NODE);
+  });
+});
