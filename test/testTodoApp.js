@@ -3,7 +3,7 @@ var assert = require('chai').assert;
 require('dom-test');
 
 var LocalStorage = require('node-localstorage').LocalStorage;
-localStorage = new LocalStorage('./scratch');
+localStorage = new LocalStorage('../scratch');
 
 var todoApp = "../todoApp.js";
 
@@ -12,6 +12,9 @@ var getTodoList = require(todoApp).getTodoList;
 var foo = require(todoApp).foo;
 var setLocalStorage = require('../todoApp.js').setLocalStorage;
 var getLocalStorage = require('../todoApp.js').getLocalStorage;
+
+
+
 
 describe('todoList', function() {
   it('should return a arry', function() {
@@ -22,15 +25,22 @@ describe('todoList', function() {
   });
 });
 
+
+
 describe('foo', function() {
   it('return foo', function() {
     expect(foo("foo")).to.equal("foo");
   });
 });
 
-describe('localStorage data should be returned as a string', () =>{
-  it('saves in localStorage', () =>{
+
+
+describe('setLocalStorage and getLocalStorage', () =>{
+  it('set localStorage as string', () =>{
     setLocalStorage(["foo", 12, "foo bar"]);
+    expect(localStorage.getItem("savedTodoList")).to.equal('["foo",12,"foo bar"]');
+  })
+  it('get localStorage as array', () => {
     expect(getLocalStorage()).to.deep.equal(["foo", 12, "foo bar"])
   })
 })
