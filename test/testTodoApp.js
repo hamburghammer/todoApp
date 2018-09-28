@@ -12,6 +12,7 @@ var getTodoList = require(todoApp).getTodoList;
 var foo = require(todoApp).foo;
 var setLocalStorage = require('../todoApp.js').setLocalStorage;
 var getLocalStorage = require('../todoApp.js').getLocalStorage;
+var createTodoEntry = require('../todoApp.js').createTodoEntry;
 
 
 

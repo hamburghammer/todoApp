@@ -133,4 +133,5 @@ module.exports = {
   localStorage: localStorage,
   setLocalStorage: setLocalStorage,
   getLocalStorage: getLocalStorage,
+  createTodoEntry: createTodoEntry,
 }
