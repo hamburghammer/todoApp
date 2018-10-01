@@ -12,8 +12,8 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 
 function checkForStorage(){
-    if (localStorage.getItem("todoList") !== null ){
-        todoList = getLocalStorage();
+    if (localStorage.getItem("savedTodoList") !== null ){
+        setTodoList(localStorage.getItem("savedTodoList"));
         for (i = 0; i < todoList.length; i++){
             return true;
         }
@@ -38,11 +38,17 @@ function addEntry(event) {
     if(typeof textAlreadyThere != 'undefined' || textAlreadyThere != null ) {
         return alert("Du hast schon so ein To-Do!")
     }
-    addTodoToList(myInput.value)
 
-    const todoListDiv = document.getElementById("Todos")
 
-    const todoEntryDiv = createTodoEntry(text, todoListDiv);
+
+    addTodoToList(text);
+    setLocalStorage(todoList);
+
+    const todoListDiv = document.getElementById("Todos");
+
+    let lastTodo = todoList.length -1;
+
+    const todoEntryDiv = createTodoEntry(lastTodo, todoListDiv);
 
     todoListDiv.appendChild(todoEntryDiv);
 
@@ -58,14 +64,21 @@ function createTodoEntry(todoEntry, todoListDiv) {
 
     let checkbox = document.createElement("input");
     checkbox.setAttribute('type', 'checkbox');
-    checkbox.checked = todoEntry.completed;//fix default
+    checkbox.checked = todoList[todoEntry].completed;
+    if (checkbox.checked === true){
+      let doneTodoList = document.getElementById("doneTodos");
+      doneTodoList.appendChild(todoEntryDiv)
+    }
 
     checkbox.addEventListener('change', function(){
         if (checkbox.checked === true){
+          debugger 
             let doneTodoList = document.getElementById("doneTodos");
             doneTodoList.appendChild(todoEntryDiv);
+            todoList[todoEntry].completed = true;
         }else {
            todoListDiv.appendChild(todoEntryDiv);
+           todoList[todoEntry].completed = false;
         }
     })
 
@@ -74,11 +87,9 @@ function createTodoEntry(todoEntry, todoListDiv) {
 
     let label = document.createElement("label");
 
-    if (typeof todoEntry === 'object'){
-        label.innerText = todoEntry.todoText;
-    }else {
-        label.innerText = todoEntry;
-    }
+
+    label.innerText = todoList[todoEntry].todoText;
+
 
     todoEntryDiv.appendChild(checkbox);
 
@@ -89,18 +100,17 @@ function createTodoEntry(todoEntry, todoListDiv) {
     button.innerText = "Remove";
 
     button.onclick = function(){
-        todoListDiv.removeChild(todoEntryDiv);//Es fehlt das entfehrnen aus dem Array
-        rmTodo(todoList.findIndex(todo => todo === todoEntry.todoTest))
+        todoListDiv.removeChild(todoEntryDiv);
     }
 
     return todoEntryDiv;
 }
 
-function setLocalStorage(storeData){
+function setLocalStorage(storeData) {
     localStorage.setItem("savedTodoList", JSON.stringify(storeData));
 }
 
-function getLocalStorage(){
+function getLocalStorage() {
     storedTodoList = JSON.parse(localStorage.getItem("savedTodoList"));
 
     return storedTodoList;
@@ -113,6 +123,10 @@ function addTodoToList(todo) {
     })
 }
 
+function setTodoList(todoList) {
+  todoList = todoList;
+}
+
 function getTodoList() {
   return todoList;
 }
@@ -121,10 +135,10 @@ function foo(bar) {
   return bar;
 }
 
-
-function rmTodo(position){
+function rmTodo(position) {
     todoList.splice(position, 1);
 }
+
 
 module.exports = {
   addTodoToList: addTodoToList,
