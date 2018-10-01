@@ -4,6 +4,7 @@ var todoList = [],
     i = 0,
     storedTodoList,
     text;
+const todoListDiv = document.getElementById("Todos");
 
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
@@ -13,11 +14,16 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 function checkForStorage(){
     if (localStorage.getItem("savedTodoList") !== null ){
-        setTodoList(localStorage.getItem("savedTodoList"));
+      debugger
+        todoList = getLocalStorage("savedTodoList");
         for (i = 0; i < todoList.length; i++){
-            return true;
+          createTodoFromStorage(i);
         }
     }
+}
+
+function createTodoFromStorage(position){
+  createTodoEntry(todolist[position]);
 }
 
 function addEntry(event) {
@@ -44,11 +50,10 @@ function addEntry(event) {
     addTodoToList(text);
     setLocalStorage(todoList);
 
-    const todoListDiv = document.getElementById("Todos");
 
     let lastTodo = todoList.length -1;
 
-    const todoEntryDiv = createTodoEntry(lastTodo, todoListDiv);
+    const todoEntryDiv = createTodoEntry(lastTodo);
 
     todoListDiv.appendChild(todoEntryDiv);
 
@@ -56,11 +61,12 @@ function addEntry(event) {
     myInput.value = "";
     myInput.focus();
 }
-
-function createTodoEntry(todoEntry, todoListDiv) {
+//Main function <---
+function createTodoEntry(todoEntry) {
 
     todoEntryDiv = document.createElement("div");
     todoEntryDiv.setAttribute("class", "todo-item");
+    todoEntryDiv.setAttribute("id", todoEntry);
 
     let checkbox = document.createElement("input");
     checkbox.setAttribute('type', 'checkbox');
@@ -72,13 +78,12 @@ function createTodoEntry(todoEntry, todoListDiv) {
 
     checkbox.addEventListener('change', function(){
         if (checkbox.checked === true){
-          debugger 
-            let doneTodoList = document.getElementById("doneTodos");
-            doneTodoList.appendChild(todoEntryDiv);
-            todoList[todoEntry].completed = true;
+          let doneTodoList = document.getElementById("doneTodos");
+          doneTodoList.appendChild(document.getElementById(todoEntry));
+          todoList[todoEntry].completed = true;
         }else {
-           todoListDiv.appendChild(todoEntryDiv);
-           todoList[todoEntry].completed = false;
+          todoListDiv.appendChild(document.getElementById(todoEntry));
+          todoList[todoEntry].completed = false;
         }
     })
 
@@ -100,7 +105,9 @@ function createTodoEntry(todoEntry, todoListDiv) {
     button.innerText = "Remove";
 
     button.onclick = function(){
-        todoListDiv.removeChild(todoEntryDiv);
+      rmTodo(todoEntry);
+      setLocalStorage(todoList);
+      location.reload(true);
     }
 
     return todoEntryDiv;
@@ -139,7 +146,7 @@ function rmTodo(position) {
     todoList.splice(position, 1);
 }
 
-
+checkForStorage()
 module.exports = {
   addTodoToList: addTodoToList,
   foo: foo,
