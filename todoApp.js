@@ -23,7 +23,7 @@ function checkForStorage(){
 }
 
 function createTodoFromStorage(position){
-  createTodoEntry(position);
+  todoListDiv.appendChild(createTodoEntry(position));
 }
 
 function addEntry(event) {
