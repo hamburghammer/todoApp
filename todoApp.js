@@ -23,7 +23,7 @@ function checkForStorage(){
 }
 
 function createTodoFromStorage(position){
-  todoListDiv.appendChild(createTodoEntry(position));
+  createTodoEntry(position);
 }
 
 function addEntry(event) {
@@ -53,9 +53,7 @@ function addEntry(event) {
 
     let lastTodo = todoList.length -1;
 
-    const todoEntryDiv = createTodoEntry(lastTodo);
-
-    todoListDiv.appendChild(todoEntryDiv);
+    createTodoEntry(lastTodo);
 
 
     myInput.value = "";
@@ -71,19 +69,18 @@ function createTodoEntry(todoEntry) {
     let checkbox = document.createElement("input");
     checkbox.setAttribute('type', 'checkbox');
     checkbox.checked = todoList[todoEntry].completed;
-    if (checkbox.checked === true){
-      let doneTodoList = document.getElementById("doneTodos");
-      doneTodoList.appendChild(todoEntryDiv)
-    }
+
 
     checkbox.addEventListener('change', function(){
         if (checkbox.checked === true){
           let doneTodoList = document.getElementById("doneTodos");
           doneTodoList.appendChild(document.getElementById(todoEntry));
           todoList[todoEntry].completed = true;
+          setLocalStorage(todoList);
         }else {
           todoListDiv.appendChild(document.getElementById(todoEntry));
           todoList[todoEntry].completed = false;
+          setLocalStorage(todoList);
         }
     })
 
@@ -109,8 +106,15 @@ function createTodoEntry(todoEntry) {
       setLocalStorage(todoList);
       location.reload(true);
     }
-    console.log("Done!");
-    return todoEntryDiv;
+
+    if (checkbox.checked === true){
+      let doneTodoList = document.getElementById("doneTodos");
+      doneTodoList.appendChild(todoEntryDiv);
+      return
+    }
+
+    todoListDiv.appendChild(todoEntryDiv);
+    return
 }
 
 function setLocalStorage(storeData) {
