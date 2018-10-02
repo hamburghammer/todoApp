@@ -14,16 +14,16 @@ if (typeof localStorage === "undefined" || localStorage === null) {
 
 function checkForStorage(){
     if (localStorage.getItem("savedTodoList") !== null ){
-      debugger
         todoList = getLocalStorage("savedTodoList");
-        for (i = 0; i < todoList.length; i++){
+        for (var i = 0; i < todoList.length; i++){
+          console.log(i);
           createTodoFromStorage(i);
         }
     }
 }
 
 function createTodoFromStorage(position){
-  createTodoEntry(todolist[position]);
+  createTodoEntry(position);
 }
 
 function addEntry(event) {
@@ -109,7 +109,7 @@ function createTodoEntry(todoEntry) {
       setLocalStorage(todoList);
       location.reload(true);
     }
-
+    console.log("Done!");
     return todoEntryDiv;
 }
 
@@ -147,12 +147,12 @@ function rmTodo(position) {
 }
 
 checkForStorage()
-module.exports = {
-  addTodoToList: addTodoToList,
-  foo: foo,
-  getTodoList: getTodoList,
-  localStorage: localStorage,
-  setLocalStorage: setLocalStorage,
-  getLocalStorage: getLocalStorage,
-  createTodoEntry: createTodoEntry,
-}
+// module.exports = {
+//   addTodoToList: addTodoToList,
+//   foo: foo,
+//   getTodoList: getTodoList,
+//   localStorage: localStorage,
+//   setLocalStorage: setLocalStorage,
+//   getLocalStorage: getLocalStorage,
+//   createTodoEntry: createTodoEntry,
+// }
