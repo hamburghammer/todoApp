@@ -109,12 +109,10 @@ function createTodoEntry(todoEntry) {
 
     if (checkbox.checked === true){
       let doneTodoList = document.getElementById("doneTodos");
-      doneTodoList.appendChild(todoEntryDiv);
-      return
+      return doneTodoList.appendChild(todoEntryDiv);
     }
 
-    todoListDiv.appendChild(todoEntryDiv);
-    return
+    return todoListDiv.appendChild(todoEntryDiv);
 }
 
 function setLocalStorage(storeData) {
@@ -122,9 +120,8 @@ function setLocalStorage(storeData) {
 }
 
 function getLocalStorage() {
-    storedTodoList = JSON.parse(localStorage.getItem("savedTodoList"));
+   return JSON.parse(localStorage.getItem("savedTodoList"));
 
-    return storedTodoList;
 }
 
 function addTodoToList(todo) {
