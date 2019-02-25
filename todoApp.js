@@ -4,12 +4,13 @@ var todoList = [],
     i = 0,
     storedTodoList,
     text;
+
 const todoListDiv = document.getElementById("Todos");
 
-if (typeof localStorage === "undefined" || localStorage === null) {
-  var LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./scratch');
-}
+// if (typeof localStorage === "undefined" || localStorage === null) {
+//   var LocalStorage = require('node-localstorage').LocalStorage;
+//   localStorage = new LocalStorage('./scratch');
+// }
 
 
 function checkForStorage(){
@@ -33,6 +34,7 @@ function addEntry(event) {
     const myInput = document.getElementById("myInput");
     text = myInput.value;
 
+//checking the submited text
     if (text === "" || typeof text === 'undefined' || text === null ) {
         return alert("Bitte gib Text ein!");
     }
@@ -45,21 +47,19 @@ function addEntry(event) {
         return alert("Du hast schon so ein To-Do!")
     }
 
-
-
+//adding the text to the local list and into the storage
     addTodoToList(text);
     setLocalStorage(todoList);
-
 
     let lastTodo = todoList.length -1;
 
     createTodoEntry(lastTodo);
 
-
     myInput.value = "";
     myInput.focus();
 }
 //Main function <---
+//creating the entry / element inside the HTML
 function createTodoEntry(todoEntry) {
 
     todoEntryDiv = document.createElement("div");
@@ -121,26 +121,14 @@ function setLocalStorage(storeData) {
 
 function getLocalStorage() {
    return JSON.parse(localStorage.getItem("savedTodoList"));
-
 }
 
+//TodoList object
 function addTodoToList(todo) {
     todoList.push({
         completed: false,
         todoText: todo,
     })
-}
-
-function setTodoList(todoList) {
-  todoList = todoList;
-}
-
-function getTodoList() {
-  return todoList;
-}
-
-function foo(bar) {
-  return bar;
 }
 
 function rmTodo(position) {
